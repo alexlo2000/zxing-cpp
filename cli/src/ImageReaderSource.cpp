@@ -74,6 +74,11 @@ Ref<LuminanceSource> ImageReaderSource::create(string const& filename) {
   } else if (extension == "jpg" || extension == "jpeg") {
     char *buffer = reinterpret_cast<char*>(jpgd::decompress_jpeg_image_from_file(
         filename.c_str(), &width, &height, &comps, 4));
+    if (!buffer) {
+        ostringstream msg;
+        msg << "Loading \"" << filename << "\" failed.";
+        throw zxing::IllegalArgumentException(msg.str().c_str());
+	}
     image = zxing::ArrayRef<char>(buffer, 4 * width * height);
     free(buffer);
   }

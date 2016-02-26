@@ -2,3 +2,5 @@
 /.idea/
 /build/
 
+cli/src/ImageReaderSource.cpp
+cli/src/ImageReaderSource.cpp
